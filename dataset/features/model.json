@@ -1,0 +1,35 @@
+{
+  "model": "facebookresearch/dinov2:dinov2_vits14",
+  "dim": 384,
+  "dtype": "float16",
+  "metric": "cosine (L2-normalized, dot product)",
+  "modes": [
+    "raw",
+    "edge"
+  ],
+  "preproc_version": 1,
+  "preproc": {
+    "input": 224,
+    "edge_work": 448,
+    "trim_th": 200,
+    "margin": 0.05,
+    "canny": [
+      50,
+      150
+    ],
+    "dilate": "3x3x1",
+    "mean": [
+      0.48500001430511475,
+      0.4560000002384186,
+      0.4059999883174896
+    ],
+    "std": [
+      0.2290000021457672,
+      0.2240000069141388,
+      0.22499999403953552
+    ]
+  },
+  "n": 12,
+  "torch": "2.14.1+cpu",
+  "built": "2026-10-16T18:37:59"
+}

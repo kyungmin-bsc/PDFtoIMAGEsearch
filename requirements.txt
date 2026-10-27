@@ -1,0 +1,5 @@
+pymupdf>=1.24
+numpy>=1.24
+opencv-python-headless>=4.8
+doclayout-yolo>=0.0.3
+huggingface_hub>=0.20

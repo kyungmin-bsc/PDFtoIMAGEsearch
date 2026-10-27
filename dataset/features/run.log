@@ -1,0 +1,16 @@
+2026-10-16 18:37:21,547 INFO main: pdf=circuit_test_book.pdf pages=11 todo=11
+2026-10-16 18:37:26,659 INFO detector_yolo: model loaded: classes={0: 'title', 1: 'plain text', 2: 'abandon', 3: 'figure', 4: 'figure_caption', 5: 'table', 6: 'table_caption', 7: 'table_footnote', 8: 'isolate_formula', 9: 'formula_caption'} target_ids=[3] hash=9a2ee0220fe3
+2026-10-16 18:37:26,850 WARNING pdf_load: 스캔 원본 DPI≈133 < 렌더 DPI 150: 업샘플링(정보 증가 없음, 용량만 증가)
+2026-10-16 18:37:30,869 INFO main: [1/11] page 1: 1 figs
+2026-10-16 18:37:33,107 INFO main: [2/11] page 2: 0 figs
+2026-10-16 18:37:35,421 INFO main: [3/11] page 3: 0 figs
+2026-10-16 18:37:37,653 INFO main: [4/11] page 4: 0 figs
+2026-10-16 18:37:40,057 INFO main: [5/11] page 5: 1 figs
+2026-10-16 18:37:42,435 INFO main: [6/11] page 6: 1 figs
+2026-10-16 18:37:44,618 INFO main: [7/11] page 7: 0 figs
+2026-10-16 18:37:46,968 INFO main: [8/11] page 8: 0 figs
+2026-10-16 18:37:49,596 INFO main: [9/11] page 9: 1 figs
+2026-10-16 18:37:52,123 INFO main: [10/11] page 10: 1 figs
+2026-10-16 18:37:54,950 INFO main: [11/11] page 11: 1 figs
+2026-10-16 18:37:54,963 INFO main: 추출 완료 28.3s, 실패 페이지=없음
+2026-10-16 18:37:55,714 INFO dinov2: using MLP layer as FFN
