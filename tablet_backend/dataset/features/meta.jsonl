@@ -1,0 +1,12 @@
+{"fig_id": "p0001_f01", "file": "figures/p0001_f01.png", "page": 1, "level": "figure", "parent": null}
+{"fig_id": "p0001_f01_s01", "file": "figures/p0001_f01_s01.png", "page": 1, "level": "subfigure", "parent": "p0001_f01"}
+{"fig_id": "p0001_f01_s02", "file": "figures/p0001_f01_s02.png", "page": 1, "level": "subfigure", "parent": "p0001_f01"}
+{"fig_id": "p0005_f01", "file": "figures/p0005_f01.png", "page": 5, "level": "figure", "parent": null}
+{"fig_id": "p0005_f01_s01", "file": "figures/p0005_f01_s01.png", "page": 5, "level": "subfigure", "parent": "p0005_f01"}
+{"fig_id": "p0005_f01_s02", "file": "figures/p0005_f01_s02.png", "page": 5, "level": "subfigure", "parent": "p0005_f01"}
+{"fig_id": "p0006_f01", "file": "figures/p0006_f01.png", "page": 6, "level": "figure", "parent": null}
+{"fig_id": "p0009_f01", "file": "figures/p0009_f01.png", "page": 9, "level": "figure", "parent": null}
+{"fig_id": "p0010_f01", "file": "figures/p0010_f01.png", "page": 10, "level": "figure", "parent": null}
+{"fig_id": "p0010_f01_s01", "file": "figures/p0010_f01_s01.png", "page": 10, "level": "subfigure", "parent": "p0010_f01"}
+{"fig_id": "p0010_f01_s02", "file": "figures/p0010_f01_s02.png", "page": 10, "level": "subfigure", "parent": "p0010_f01"}
+{"fig_id": "p0011_f01", "file": "figures/p0011_f01.png", "page": 11, "level": "figure", "parent": null}

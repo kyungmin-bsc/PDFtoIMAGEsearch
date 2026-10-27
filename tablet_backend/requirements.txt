@@ -1,0 +1,13 @@
+pymupdf>=1.24
+numpy>=1.24
+opencv-python-headless>=4.8
+doclayout-yolo>=0.0.3
+huggingface_hub>=0.20
+
+# --- 코드에서 사용하지만 원본 requirements 에 없던 항목 ---
+torch                 # embedding (DINOv2, torch.hub 로 첫 실행 시 다운로드)
+supabase              # sync
+python-dotenv         # sync (.env 로드)
+# 개발용 데모 (tools/search_app.py) 만 필요
+streamlit
+pillow
