@@ -1,4 +1,4 @@
-"""python main.py dataset/book.pdf [--overwrite] [--pages 1-50] [--skip-features]
+"""python main.py book/circuit_test_book.pdf [--overwrite] [--pages 1-50] [--skip-features]
 PDF -> figures/*.png -> features/{embeddings_*.npy, meta.jsonl, model.json}
 """
 from __future__ import annotations
