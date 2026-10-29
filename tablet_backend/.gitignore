@@ -1,3 +1,5 @@
 .env
 .vs/
 __pycache__/
+server_data/
+.pytest_cache/

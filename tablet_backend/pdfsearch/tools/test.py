@@ -10,7 +10,7 @@ from pdfsearch.embedding.features import Embedder
 ap = argparse.ArgumentParser()
 ap.add_argument("image")
 ap.add_argument("--root", default="dataset")
-ap.add_argument("--mode", default="raw", choices=["raw", "edge"])
+ap.add_argument("--mode", default="edge", choices=["edge"])   # 임베딩은 edge 만 저장
 ap.add_argument("--k", type=int, default=3)
 a = ap.parse_args()
 

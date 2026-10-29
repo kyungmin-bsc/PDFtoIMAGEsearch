@@ -1,1 +1,1 @@
-from pdfsearch.embedding.features import Embedder, build_features, normalize, MODES, PREPROC_VERSION
+from pdfsearch.embedding.features import Embedder, build_features, normalize, tile_boxes, MODES, PREPROC_VERSION

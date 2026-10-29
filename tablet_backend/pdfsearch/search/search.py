@@ -3,6 +3,10 @@
 조원 저장소(PDFtoIMAGEsearch)의 features.py / saver.py 를 그대로 import 해서
 같은 전처리(normalize)와 같은 DINOv2 모델(Embedder)로 질의 벡터를 만든다.
 
+임베딩 행에는 그림 전체(kind=whole)와 격자 조각(kind=tile)이 섞여 있다.
+스케치는 통째로 벡터 1개로 만들고 모든 행과 비교한 뒤,
+그림마다 가장 높은 행의 점수를 그 그림의 점수로 쓴다 (예전 dataset 은 whole 만 있어 그대로 동작).
+
 사용 예 (터미널):
     python search.py my_sketch.png --mode edge --k 3
 """
@@ -60,6 +64,7 @@ class FigureSearcher:
             if len(E) != len(self.meta):
                 raise RuntimeError(f"{mode}: 임베딩 {len(E)}개 != meta {len(self.meta)}줄")
             self.emb[mode] = E
+        self.is_tile = np.array([m.get("kind") == "tile" for m in self.meta], bool)
 
         # 3) DINOv2 는 무거우므로 한 번만 로드
         self.embedder = embedder or Embedder()
@@ -68,12 +73,19 @@ class FigureSearcher:
     def embed_query(self, rgb: np.ndarray, mode: str) -> np.ndarray:
         return self.embedder.embed_images([rgb], mode)[0]          # (384,) L2 정규화
 
-    def search(self, rgb: np.ndarray, mode: str = "edge", k: int = 3) -> list[dict]:
-        """RGB uint8 이미지 -> 같은 페이지 중복 제거한 상위 k개 페이지."""
+    def search(self, rgb: np.ndarray, mode: str = "edge", k: int = 3,
+               tiles: bool = True) -> list[dict]:
+        """RGB uint8 이미지 -> 같은 페이지 중복 제거한 상위 k개 페이지.
+
+        tiles=False 면 조각 행을 빼고 그림 전체끼리만 비교 (예전 방식, 비교 실험용).
+        점수 높은 행부터 훑으므로 페이지마다 처음 나온 행 = 그 페이지(그림)의 최고 점수 행.
+        """
         if mode not in self.emb:
             raise ValueError(f"mode 는 {MODES} 중 하나")
         q = self.embed_query(rgb, mode)
         sims = self.emb[mode] @ q                                   # 코사인 유사도
+        if not tiles:
+            sims = np.where(self.is_tile, -np.inf, sims)
 
         results, seen = [], set()
         for i in np.argsort(-sims):
@@ -89,13 +101,16 @@ class FigureSearcher:
                 "file": str(self.root / m["file"]),
                 "level": m.get("level", "figure"),
                 "parent": m.get("parent"),
+                "matched": m.get("kind", "whole"),                  # whole | tile
+                "match_box": m.get("box"),                          # 조각 위치 [x,y,w,h] 0~1 (그림 기준)
             })
             if len(results) == k:
                 break
         return results
 
-    def search_file(self, path: str | Path, mode: str = "edge", k: int = 3) -> list[dict]:
-        return self.search(imread_rgb(Path(path)), mode, k)
+    def search_file(self, path: str | Path, mode: str = "edge", k: int = 3,
+                    tiles: bool = True) -> list[dict]:
+        return self.search(imread_rgb(Path(path)), mode, k, tiles)
 
     def render_page(self, page: int, dpi: int = 150) -> bytes | None:
         """검색된 PDF 페이지를 PNG 바이트로 렌더링."""
@@ -111,9 +126,11 @@ if __name__ == "__main__":
     ap.add_argument("image")
     ap.add_argument("--mode", default="edge", choices=MODES)
     ap.add_argument("--k", type=int, default=3)
+    ap.add_argument("--no-tiles", action="store_true", help="조각 없이 그림 전체끼리만 비교")
     a = ap.parse_args()
 
     s = FigureSearcher()
     print(f"PDF: {s.pdf_path}")
-    for r in s.search_file(a.image, a.mode, a.k):
-        print(f"{r['rank']}위 | p.{r['page']} | sim={r['score']:.4f} | {r['fig_id']} ({r['level']})")
+    for r in s.search_file(a.image, a.mode, a.k, tiles=not a.no_tiles):
+        where = f" 조각{r['match_box']}" if r["matched"] == "tile" else " 전체"
+        print(f"{r['rank']}위 | p.{r['page']} | sim={r['score']:.4f} | {r['fig_id']} ({r['level']}){where}")

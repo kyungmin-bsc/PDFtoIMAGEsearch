@@ -28,7 +28,6 @@ from supabase import create_client
 FREE_PLAN_FILE_LIMIT = 50 * 1024 * 1024          # Free 플랜 단일 파일 업로드 한도 50MB
 EXCLUDE_SUFFIXES = {".pdf"}                       # 책 원본은 로컬 book/ 에만 둠
 SEARCH_FILES = (                                  # 검색 담당이 실제로 쓰는 파일
-    "features/embeddings_raw.npy",
     "features/embeddings_edge.npy",
     "features/meta.jsonl",
     "features/model.json",

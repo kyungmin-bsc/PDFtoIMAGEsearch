@@ -21,8 +21,7 @@ st.caption(f"검색 대상 PDF: {searcher.pdf_path.name if searcher.pdf_path els
            f" · 저장된 그림 {len(searcher.meta)}개")
 
 with st.sidebar:
-    mode = st.radio("검색 모드", ["edge", "raw"],
-                    help="edge: 윤곽선 기반(스케치용), raw: 원본 회색조")
+    mode = "edge"                       # 임베딩은 edge 하나만 저장
     k = st.slider("결과 페이지 수", 1, 5, 3)
     show_page = st.checkbox("PDF 페이지 전체 보기", value=True)
 

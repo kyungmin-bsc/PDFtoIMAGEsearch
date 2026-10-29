@@ -11,3 +11,11 @@ python-dotenv         # sync (.env 로드)
 # 개발용 데모 (tools/search_app.py) 만 필요
 streamlit
 pillow
+
+# --- 태블릿 앱용 HTTP 서버 (pdfsearch/server) ---
+fastapi
+uvicorn[standard]
+python-multipart
+# 서버 테스트 (tests/test_server.py)
+pytest
+httpx
